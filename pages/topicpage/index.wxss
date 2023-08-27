@@ -1,0 +1,46 @@
+/**index.wxss**/
+.content_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 20rpx 5rpx;
+  box-sizing: border-box;
+} 
+
+.content_container_item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  align-items: top;
+} 
+
+.topic_avatar image {
+  min-width: 40px;
+  min-height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.topic_content image {
+  min-width: 20px;
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px 0 10px;
+}
+
+.topic_content_icons {
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+  justify-content: flex-end;
+}
+

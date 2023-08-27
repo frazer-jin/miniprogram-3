@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view class="container">
+  <block wx:if="{{none}}">
+    <icon class="icon-box-img" type="warn" size="50"></icon>
+    <view class="icon-box-ctn">
+      <view class="icon-box-desc">没有找到该宠物的相关信息</view>
+    </view>
+  </block>
+  <block wx:else="">
+    <view class="top_container">
+      <view>
+        <image wx:if="{{animal.avatar_id >=0}}" src="../../icons/_{{animal.avatar_id}}.jpeg"></image>
+      </view>
+      <view class="detail_box">
+        <view>
+          <text>名字：</text>
+          <text>{{animal.name}}</text>
+        </view>
+        <view>
+          <text>性别：</text>
+          <text>{{animal.sex? '雄性' : '雌性'}}</text>
+        </view>
+        <view>
+          <text>时间：</text>
+          <text>{{animal.birth}}</text>
+        </view>
+        <view>
+          <text>关系网： </text>
+          <text>{{animal.relationship}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="bottom_container">
+      <view>
+        <text>是否注射疫苗： </text>
+        <text>{{animal.vaccinum?'是': '否'}}</text>
+      </view>
+      <view>
+        <text>是否绝育： </text>
+        <text>{{animal.sterilization? '是':'否'}}</text>
+      </view>
+    </view>
+  </block>
+</view>

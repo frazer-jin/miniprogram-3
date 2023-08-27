@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/topicpage/index",
+    "pages/indexpage/index",
+    "pages/fundspage/index",
+    "pages/minepage/index",
+    "pages/detailpage/index",
+    "pages/topicdetailpage/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "宠物救助站",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/indexpage/index",
+        "text": "宠物",
+        "iconPath": "images/home-1.png",
+        "selectedIconPath": "images/home.png"
+      },
+      {
+        "pagePath": "pages/topicpage/index",
+        "text": "话题",
+        "iconPath": "images/topic-1.png",
+        "selectedIconPath": "images/topic.png"
+      },
+      {
+        "pagePath": "pages/fundspage/index",
+        "text": "筹款",
+        "iconPath": "images/fund-1.png",
+        "selectedIconPath": "images/fund.png"
+      },
+      {
+        "pagePath": "pages/minepage/index",
+        "text": "我的",
+        "iconPath": "images/mine-1.png",
+        "selectedIconPath": "images/mine.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

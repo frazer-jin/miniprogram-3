@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="top_container">
+    <view class="search_box">
+      <icon class="icon-search" type="search" size="20"></icon>
+      <input placeholder="请输入宠物名字搜索" bindinput="onSearched" />
+    </view>
+    <view class="scan_box">
+      <image src="../../icons/scan.svg" bindtap="scan"></image>
+    </view>
+  </view>
+  <view class="content_container">
+    <block wx:for="{{animals}}">
+      <view class="content_container_item" wx:key="id" data-index="{{index}}" bindtap="onAnimalSelected">
+          <image src="../../icons/_{{item.avatar_id}}.jpeg"></image>
+          <text>{{item.name}}</text>
+        </view>
+    </block>
+  </view>
+</view>

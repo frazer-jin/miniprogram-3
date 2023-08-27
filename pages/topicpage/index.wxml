@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="content_container">
+    <block wx:for="{{topics}}">
+      <view class="content_container_item" wx:key="id" data-index="{{index}}">
+        <view class="topic_avatar">
+          <image src="{{item.avatar}}"></image>
+        </view>
+        <view class="topic_content">
+          <view><text>{{item.time}}</text></view>
+          <view><text>{{item.content}}</text></view>
+          <view class="topic_content_icons">
+            <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{index}}"></image>
+            <view><text>{{item.comment}}</text></view>
+            <image src="../../images/like.png"></image>
+            <text>{{item.like}}</text>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+</view>

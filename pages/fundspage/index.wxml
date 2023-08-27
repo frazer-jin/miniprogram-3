@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+    <image src="../../images/qr.jpg" show-menu-by-longpress="true" mode="aspectFit"></image>
+  </view>
+  <view>
+    message: balabala
+  </view>
+</view>

@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view class="container">
+  <block wx:if="{{none}}">
+    <icon class="icon-box-img" type="warn" size="50"></icon>
+    <view class="icon-box-ctn">
+      <view class="icon-box-desc">没有找到该话题的相关信息</view>
+    </view>
+  </block>
+  <block wx:else="">
+    <view class="top_container">
+      xxxx
+    </view>
+  </block>
+</view>
