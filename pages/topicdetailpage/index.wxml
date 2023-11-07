@@ -6,9 +6,39 @@
       <view class="icon-box-desc">没有找到该话题的相关信息</view>
     </view>
   </block>
-  <block wx:else="">
-    <view class="top_container">
-      xxxx
+  <block wx:else>
+    <!--index.wxml-->
+    <view class="container">
+      <view class="content_container">
+        <view class="content_container_item">
+          <view class="topic_avatar">
+            <image src="{{topic.avatar}}"></image>
+          </view>
+          <view class="topic_content">
+            <view><text>{{topic.time}}</text></view>
+            <view><text>{{topic.content}}</text></view>
+          </view>
+        </view>
+        <view class="topic_content_footer">
+          <text>评论 </text><text>{{topic.comment}}</text>
+          <text>  赞 </text><text>{{topic.like}}</text>
+        </view>
+        <view class="comment_container_item">
+          <block wx:for="{{comments}}">
+            <view class="content_container_item" wx:key="id" data-index="{{index}}">
+              <view class="topic_avatar">
+                <image src="{{item.avatar}}"></image>
+              </view>
+              <view class="topic_content">
+                <view><text>{{item.time}}</text></view>
+                <view><text>{{item.content}}</text></view>
+              </view>
+
+            </view>
+          </block>
+        </view>
+      </view>
     </view>
+
   </block>
 </view>

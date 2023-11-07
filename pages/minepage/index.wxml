@@ -1,4 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  
+  <view wx:if="{{!user.id}}">
+    <button bindtap="login">授权登录</button>
+  </view>
+  <view wx:else>
+    <view>
+      <text>{{user.login_time}}</text>
+    </view>
+    <view>
+      <text>{{user.name}}</text>
+    </view>
+    <button bindtap="logout">退出登录</button>
+  </view>
 </view>

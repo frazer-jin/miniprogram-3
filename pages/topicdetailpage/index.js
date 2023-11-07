@@ -16,6 +16,9 @@ Page({
         this.setData({
           topic: e
         })
+        this.setData({
+          comments: app.globalData.comments
+        })
         console.log(e);
       }
     });

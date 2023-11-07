@@ -12,7 +12,12 @@
           <view class="topic_content_icons">
             <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{index}}"></image>
             <view><text>{{item.comment}}</text></view>
-            <image src="../../images/like.png"></image>
+            <block wx:if="{{item.i_liked}}">
+              <image src="../../images/like-1.png" bindtap="onTopicLike" data-index="{{index}}"></image>
+            </block>
+            <block wx:else>
+              <image src="../../images/like.png" bindtap="onTopicLike" data-index="{{index}}"></image>
+            </block>
             <text>{{item.like}}</text>
           </view>
         </view>
