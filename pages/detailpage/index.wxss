@@ -35,3 +35,12 @@
   box-sizing: border-box;
   border-top: 1px dashed #bbb;
 } 
+
+.actions_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20rpx 15rpx;
+}

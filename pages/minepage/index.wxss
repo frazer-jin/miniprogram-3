@@ -1,22 +1,26 @@
 /**index.wxss**/
+.container {
+  padding: 5px;
+}
+
 .top_container {
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20rpx 5rpx;
+  align-items: top;
+  justify-content: flex-start;
+  padding: 20rpx 15rpx;
   box-sizing: border-box;
 } 
-.mid_container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
-  padding: 20rpx 5rpx;
-  box-sizing: border-box;
-} 
+
+.top_container image {
+  min-width: 100px;
+  min-height: 100px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
 .content_container {
   width: 100%;
   display: flex;
@@ -54,37 +58,36 @@
   flex-shrink: 2;
 }
 
-.search_box {
-  margin-left: 15px;
-  padding: 5px 2px;
-  background: #eee;
-  width: 500px;
-  flex-shrink: 2;
+.title_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
-.search_box input {
-  margin-left: 20px;
+.title_container button {
+  margin-right: 10rpx;
 }
 
-.icon-search {
-  display: block;
-  position: absolute;
+.bottom_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+  border-top: 1px dashed #bbb;
+} 
+
+/* 在组件的样式文件中 */
+.bottom-component {
+  position: fixed; /* 或者 position: absolute; */
+  bottom: 10px;
+  width: 100%; /* 如果需要占满整个页面宽度 */
 }
 
-.scan_box image {
-  width: 30px;
-  height: 30px;
-}
-
-.mid_container_item {
-  width: 34%;
-  height: 20px;
-  text-align: center;
-  margin: 5px 10px;
-  border-bottom: 2px solid transparent;
-}
-
-.mid_container_item_selected {
-  border-bottom: 2px solid #1195db;
-  color: #1195db;
-}

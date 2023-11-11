@@ -12,10 +12,53 @@ Page({
     console.log(user);
 
     if (user) {
+      // users
       this.setData({
         user: user
       });
     }
+  },
+
+  onShow() {
+    const user = this.data.user;
+    if(user) {
+      // animals
+      this.loadAnimals(user);
+    }
+  },
+
+  loadAnimals: function(user) {
+    // todo
+    utils.http.get('/pets').then(data => {
+      console.log(data);
+      this.setData({
+        animals: data
+      });
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'failed'
+      });
+      this.setData({
+        animals: []
+      });
+    });
+  },
+
+  onAnimalSelected(e) {
+    console.log(e)
+    const id = e.currentTarget.dataset.index;
+    console.log(id);
+    wx.navigateTo({
+      url: '../detailpage/index?id=' + id
+    })
+  },
+
+  onAnimalNew(e) {
+    wx.navigateTo({
+      url: '../petpage/index'
+    });
   },
 
   // 点击授权按钮触发的事件
@@ -33,24 +76,33 @@ Page({
             if (res.code) {
               console.log(res.code);
               console.log(userInfo);
-              //发起网络请求
-              // wx.request({
-              //   url: 'https://example.com/onLogin',
-              //   data: {
-              //     code: res.code
-              //   }
-              // });
+              const {nickName, country, province, city, gender, avatarUrl} = userInfo;
 
-              // 测试代码
-              const user = {
-                name: 'jack',
-                id: Date.now(),
-                login_time: utils.formatTime(Date.now())
-              }
-              session.setUser(user);
-              that.setData({
-                user: user
-              })
+              const payload = {
+                nick_name: nickName,
+                country,
+                province,
+                city,
+                gender,
+                avatar_url: avatarUrl
+              };
+
+              utils.http.post('/auth/login', payload).then((data)=>{
+                console.log(data);
+                const user = {
+                  token: data.access_token,
+                  id: data.user_id,
+                  name: data.user_name,
+                  avatar: data.user_avatar,
+                  login_time: utils.formatTime(Date.now())
+                }
+                session.setUser(user);
+                that.setData({
+                  user: user
+                })
+              }).catch(e => {
+                console.log('登录失败!！' + e)
+              });
             } else {
               console.log('登录失败！' + res.errMsg)
             }
@@ -67,3 +119,4 @@ Page({
     })
   }
 })
+

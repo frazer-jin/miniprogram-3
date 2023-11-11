@@ -9,7 +9,7 @@
   <block wx:else="">
     <view class="top_container">
       <view>
-        <image wx:if="{{animal.avatar_id >=0}}" src="../../icons/_{{animal.avatar_id}}.jpeg"></image>
+        <image src="{{animal.avatar}}"></image>
       </view>
       <view class="detail_box">
         <view>
@@ -22,7 +22,7 @@
         </view>
         <view>
           <text>时间：</text>
-          <text>{{animal.birth}}</text>
+          <text>{{animal.birthday}}</text>
         </view>
         <view>
           <text>关系网： </text>
@@ -39,6 +39,11 @@
         <text>是否绝育： </text>
         <text>{{animal.sterilization? '是':'否'}}</text>
       </view>
+    </view>
+    <view class="actions_container">
+      <block wx:if="{{user && user.id === animal.user_id}}">
+        <button size="mini" type="default" data-id="{{animal.id}}" bindtap="onAnimalDelete">删除</button>
+      </block>
     </view>
   </block>
 </view>

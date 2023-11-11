@@ -1,0 +1,32 @@
+.container {
+  padding: 20rpx;
+}
+
+.form-item {
+  margin-bottom: 20rpx;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form-item text {
+  width: 80px;
+}
+
+.form-item image {
+  min-width: 120px;
+  min-height: 120px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+

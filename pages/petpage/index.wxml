@@ -1,0 +1,38 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="form-item flex-row ">
+      <text>名字：</text><input type="text" name="name" placeholder="请输入宠物的名字" bindblur="nameChange" />
+    </view>
+    <view class="form-item flex-row ">
+      <text>头像：</text><image src="{{imageUrl}}" mode="aspectFill" bindtap="chooseImage"></image>
+    </view>
+    <view class="form-item flex-row ">
+      <text>性别：</text>
+      <picker mode="selector" range="{{['雄性', '雌性', '未知']}}" bindchange="genderChange">
+        <view>{{genderArray[genderIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item flex-row ">
+      <text>注射疫苗：</text>
+      <picker mode="selector" range="{{['是', '否', '未知']}}" bindchange="vaccineChange">
+        <view>{{vaccineArray[vaccineIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item flex-row ">
+      <text>绝育：</text>
+      <picker mode="selector" range="{{['是', '否', '未知']}}" bindchange="sterilizationChange">
+        <view>{{sterilizationArray[sterilizationIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item flex-row ">
+      <text>生日：</text>
+      <picker mode="date" start="1900-01-01" end="{{todayDate}}" value="{{birthday}}" bindchange="birthdayChange">
+        <view>{{birthday}}</view>
+      </picker>
+    </view>
+    <view class="button-group flex-row ">
+      <button formType="submit" disabled="{{buttonDisabled}}">提交</button>
+      <button formType="reset">取消</button>
+    </view>
+  </form>
+</view>

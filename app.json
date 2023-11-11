@@ -6,6 +6,7 @@
     "pages/minepage/index",
     "pages/detailpage/index",
     "pages/topicdetailpage/index",
+    "pages/petpage/index",
     "pages/logs/logs"
   ],
   "window": {
@@ -15,6 +16,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/indexpage/index",

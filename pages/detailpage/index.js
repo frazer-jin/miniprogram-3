@@ -1,3 +1,5 @@
+const { http } = require('../../utils/util');
+const session = require('../../utils/session');
 // index.js
 // 获取应用实例
 const app = getApp()
@@ -6,25 +8,65 @@ Page({
   data: {
     animal: undefined,
     none: undefined, // 动物没找到的话，这个值为true
+    user: undefined,
   },
   onLoad(option) {
-    this.setData({
-      animals: app.globalData.animals
-    });
-    let existed = false;
-    app.globalData.animals.forEach(e => {
-      if(e.id == option.id) {
-        existed = true;
+    const user = session.getUser();
+    if (user) {
+      this.setData({
+        user: user
+      });
+    }
+
+    console.log(user)
+
+    http.get('/pets/' + option.id).then(data => {
+      console.log(data);
+      if(!data) {
         this.setData({
-          animal: e
+          none: true
         })
-        console.log(e);
+      } else {
+        this.setData({
+          animal: data
+        })
       }
-    });
-    if(!existed) {
+      //
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'failed'
+      });
       this.setData({
         none: true
       })
-    }
+    });
   },
+
+  onAnimalDelete(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该宠物吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          // 在用户点击确定后的相关逻辑
+          http.delete('/pets/' + id).then(data => {
+            console.log(data);
+            wx.navigateBack();
+          }).catch(e => {
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            });
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+          // 在用户点击取消后的相关逻辑
+        }
+      }
+    })
+  }
 })
