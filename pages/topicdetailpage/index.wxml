@@ -21,7 +21,7 @@
         </view>
         <view class="topic_content_footer">
           <text>评论 </text><text>{{topic.comment}}</text>
-          <text>  赞 </text><text>{{topic.like}}</text>
+          <text> 赞 </text><text>{{topic.like}}</text>
         </view>
         <view class="comment_container_item">
           <block wx:for="{{comments}}">
@@ -39,6 +39,11 @@
         </view>
       </view>
     </view>
-
+    <view class="bottom-component">
+      <form bindsubmit="bindFormSubmit">
+        <textarea placeholder="发表您的评论" name="textarea" />
+        <button form-type="submit"> 提交 </button>
+      </form>
+    </view>
   </block>
 </view>

@@ -49,6 +49,42 @@ Page({
     this.setData({
       buttonDisabled: true
     });
+
+    if (/cloud:/i.test(this.data.imageUrl)) {
+      this.saveForm(e);
+    } else {
+      // 解析文件路径，获取文件名
+      var filename = this.data.imageUrl.split('/').pop();
+      // 获取文件后缀名
+      var fileExt = filename.split('.').pop();
+      console.log('avatar url:', this.data.imageUrl);
+      // 上传头像
+      http.uploadFile(new Date().getTime() + '.' + fileExt, this.data.imageUrl).then(data => {
+        console.log(data);
+        this.setData({
+          imageUrl: data
+        });
+
+        this.saveForm(e);
+      }).catch(e => {
+        console.log(e);
+        wx.showToast({
+          title: '保存头像失败, 请重新选择',
+          icon: 'none'
+        });
+        this.setData({
+          buttonDisabled: false
+        });
+        return;
+      });
+    }
+  },
+  formReset: function () {
+    wx.navigateBack();
+  },
+
+  saveForm: function (e) {
+    // save
     const payload = {
       name: e.detail.value.name,
       gender: this.data.genderIndex,
@@ -72,44 +108,31 @@ Page({
       });
     });
   },
-  formReset: function () {
-    wx.navigateBack();
-  },
 
   chooseImage: function () {
     const that = this;
-    wx.chooseImage({
+    wx.chooseMedia({
       count: 1,
+      mediaType: ['image'],
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        const tempFilePath = res.tempFilePaths[0];
+        const tempFilePath = res.tempFiles[0].tempFilePath;
+        const tempFileSize = res.tempFiles[0].size;
 
-        // 使用 wx.getFileSystemManager 的 readFile 方法读取图片文件
-        const fsm = wx.getFileSystemManager();
-        fsm.readFile({
-          filePath: tempFilePath,
-          encoding: 'base64', // 以base64编码格式读取文件
-          success(readRes) {
-            // 图片的base64格式内容在readRes.data中
-            console.log(readRes.data);
-            if(readRes.data.length > 1000 * 1024) {
-              // 1000k
-              wx.showToast({
-                title: '图片太大，请选择小于200KB的图片',
-                icon: 'none'
-              });
-            } else {
-              that.setData({
-                imageUrl: 'data:image/jpeg;base64,' + readRes.data
-              });
-            }
-          },
-          fail(readErr) {
-            // 读取失败后的回调
-            console.error(readErr);
-          }
-        });
+        // 判断图片大小是否符合要求
+        if (tempFileSize > 1024 * 1024) {
+          // 如果图片大小超过1MB，进行提醒或其他处理
+          wx.showToast({
+            title: '所选图片太大，请选择小于1MB的图片',
+            icon: 'none'
+          });
+        } else {
+          // 图片大小符合要求，继续处理
+          that.setData({
+            imageUrl: tempFilePath,
+          });
+        }
       }
     })
   },

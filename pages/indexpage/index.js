@@ -1,3 +1,4 @@
+const { http } = require('../../utils/util')
 // index.js
 // 获取应用实例
 const app = getApp()
@@ -8,10 +9,28 @@ Page({
     animals: undefined, // 动物列表
   },
   onLoad() {
-    this.setData({
-      animals: app.globalData.animals
+    this.loadAnimals();
+  },
+
+
+  loadAnimals: function() {
+    http.get('/pets').then(data => {
+      console.log(data);
+      this.setData({
+        animals: data
+      });
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'failed'
+      });
+      this.setData({
+        animals: []
+      });
     });
   },
+
   scan() {
     wx.scanCode({
       success: (res) => {

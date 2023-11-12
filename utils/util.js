@@ -39,6 +39,48 @@ const http = {
     return (result.statusCode >= 200 && result.statusCode < 300) ? result.data : null;
   },
 
+  async uploadFile(path, file) {
+    return new Promise((resolve, reject) => {
+      const task = wx.cloud.uploadFile({
+        cloudPath: path,
+        filePath: file,
+        config: {
+          env: http.env
+        },
+        success: res => resolve(res.fileID),
+        fail: e => {
+          const info = e.toString()
+          if (info.indexOf('abort') != -1) {
+            reject(new Error('【文件上传失败】中断上传'))
+          } else {
+            reject(new Error('【文件上传失败】网络或其他错误'))
+          }
+        }
+      })
+    });
+  },
+
+  async deleteFile(fileId) {
+    return new Promise((resolve, reject) => {
+      wx.cloud.deleteFile({
+        fileList: [fileId], // 对象存储文件ID列表，最多50个，从上传文件接口或者控制台获取
+        config: {
+          env: http.env
+        },
+        success: res => {
+          resolve(res.fileList)
+        },
+        fail: err => {
+          reject(new Error('【文件删除失败】'))
+        },
+        complete: res => {
+          console.log(res)
+        }
+      })
+      
+    });
+  },
+
   async get(path) {
     return http.request('GET', path);
   },

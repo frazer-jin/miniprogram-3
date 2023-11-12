@@ -11,8 +11,8 @@
   </view>
   <view class="content_container">
     <block wx:for="{{animals}}">
-      <view class="content_container_item" wx:key="id" data-index="{{index}}" bindtap="onAnimalSelected">
-          <image src="../../icons/_{{item.avatar_id}}.jpeg"></image>
+      <view class="content_container_item" wx:key="id" data-index="{{item.id}}" bindtap="onAnimalSelected">
+          <image src="{{item.avatar}}"></image>
           <text>{{item.name}}</text>
         </view>
     </block>

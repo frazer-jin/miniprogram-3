@@ -8,7 +8,7 @@
         </view>
         <view class="topic_content">
           <view><text>{{item.time}}</text></view>
-          <view><text>{{item.content}}</text></view>
+          <view bindtap="onTopicSelected" data-index="{{index}}"><text>{{item.content}}</text></view>
           <view class="topic_content_icons">
             <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{index}}"></image>
             <view><text>{{item.comment}}</text></view>

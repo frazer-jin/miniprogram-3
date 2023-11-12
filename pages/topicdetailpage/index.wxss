@@ -44,3 +44,8 @@
   color: #666;
 }
 
+.bottom-component {
+  position: fixed; /* 或者 position: absolute; */
+  bottom: 10px;
+  width: 100%; /* 如果需要占满整个页面宽度 */
+}

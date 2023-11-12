@@ -16,9 +16,9 @@ Page({
       this.setData({
         user: user
       });
+    } else {
+      console.log('用户未登录');
     }
-
-    console.log(user)
 
     http.get('/pets/' + option.id).then(data => {
       console.log(data);
@@ -55,6 +55,10 @@ Page({
           // 在用户点击确定后的相关逻辑
           http.delete('/pets/' + id).then(data => {
             console.log(data);
+            // 如果不是默认头像，则删除头像文件
+            if(data && !/example.png$/i.test(data.avatar)) {
+              http.deleteFile(data.avatar);
+            }
             wx.navigateBack();
           }).catch(e => {
             wx.showToast({
