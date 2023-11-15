@@ -21,13 +21,13 @@ Page({
 
   onShow() {
     const user = this.data.user;
-    if(user) {
+    if (user) {
       // animals
       this.loadAnimals(user);
     }
   },
 
-  loadAnimals: function(user) {
+  loadAnimals: function (user) {
     // todo
     utils.http.get('/pets').then(data => {
       console.log(data);
@@ -70,44 +70,41 @@ Page({
       success: function (res) {
         var userInfo = res.userInfo; // 获取到用户信息，可根据需求进行处理
 
-        // 获取一次性 code
-        wx.login({
-          success(res) {
-            if (res.code) {
-              console.log(res.code);
-              console.log(userInfo);
-              const {nickName, country, province, city, gender, avatarUrl} = userInfo;
+        console.log(userInfo);
+        const {
+          nickName,
+          country,
+          province,
+          city,
+          gender,
+          avatarUrl
+        } = userInfo;
 
-              const payload = {
-                nick_name: nickName,
-                country,
-                province,
-                city,
-                gender,
-                avatar_url: avatarUrl
-              };
+        const payload = {
+          nick_name: nickName,
+          country,
+          province,
+          city,
+          gender,
+          avatar_url: avatarUrl
+        };
 
-              utils.http.post('/auth/login', payload).then((data)=>{
-                console.log(data);
-                const user = {
-                  token: data.access_token,
-                  id: data.user_id,
-                  name: data.user_name,
-                  avatar: data.user_avatar,
-                  login_time: utils.formatTime(Date.now())
-                }
-                session.setUser(user);
-                that.setData({
-                  user: user
-                })
-              }).catch(e => {
-                console.log('登录失败!！' + e)
-              });
-            } else {
-              console.log('登录失败！' + res.errMsg)
-            }
+        utils.http.post('/auth/login', payload).then((data) => {
+          console.log(data);
+          const user = {
+            token: data.access_token,
+            id: data.user_id,
+            name: data.user_name,
+            avatar: data.user_avatar,
+            login_time: utils.formatTime(Date.now())
           }
-        })
+          session.setUser(user);
+          that.setData({
+            user: user
+          })
+        }).catch(e => {
+          console.log('登录失败!！' + e)
+        });
       }
     });
   },
@@ -119,4 +116,3 @@ Page({
     })
   }
 })
-

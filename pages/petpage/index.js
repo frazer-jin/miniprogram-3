@@ -92,7 +92,6 @@ Page({
       birthday: this.data.birthday,
       vaccines: this.data.vaccineIndex,
       sterilization: this.data.sterilizationIndex,
-      user_id: 4,
     }
 
     http.post('/pets', payload).then(data => {

@@ -1,3 +1,5 @@
+const session = require('./session');
+
 const formatTime = millis => {
   const date = new Date(millis);
   const year = date.getFullYear()
@@ -32,6 +34,7 @@ const http = {
       method: method, // 按照自己的业务开发，选择对应的方法
       header: {
         'X-WX-SERVICE': http.service, // xxx中填入服务名称（微信云托管 - 服务管理 - 服务列表 - 服务名称）
+        'Authorization': 'Bearer ' + session.getUser()?.token
       },
       data: payload,
       dataType:'json', // 默认不填是以JSON形式解析返回结果，若不想让SDK自己解析，可以填text

@@ -58,6 +58,13 @@
   flex-shrink: 2;
 }
 
+.detail_box view {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
 .title_container {
   width: 100%;
   display: flex;

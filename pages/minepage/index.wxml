@@ -4,16 +4,16 @@
 </view>
 <view class="container" wx:else>
   <view class="top_container">
-    <view>
+    <view style="width: 130px;">
       <image src="{{user.avatar}}"></image>
     </view>
     <view class="detail_box">
       <view>
-        <text>用户名：</text>
+        <text style="width: 70px;">用户名：</text>
         <text>{{user.name}}</text>
       </view>
       <view>
-        <text>登录时间： </text>
+        <text style="width: 70px;">登录时间： </text>
         <text>{{user.login_time}}</text>
       </view>
     </view>
