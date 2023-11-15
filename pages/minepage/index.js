@@ -5,7 +5,9 @@ const utils = require('../../utils/util');
 const app = getApp()
 
 Page({
-  data: {},
+  data: {
+    buttonDisabled: false,
+  },
   onLoad() {
     // 检查用户是否已登录，如果未登录，提示用户先登录
     const user = session.getUser();
@@ -89,6 +91,10 @@ Page({
           avatar_url: avatarUrl
         };
 
+        that.setData({
+          buttonDisabled: true
+        });
+
         utils.http.post('/auth/login', payload).then((data) => {
           console.log(data);
           const user = {
@@ -102,6 +108,9 @@ Page({
           that.setData({
             user: user
           })
+          that.setData({
+            buttonDisabled: false
+          });
         }).catch(e => {
           console.log('登录失败!！' + e)
         });

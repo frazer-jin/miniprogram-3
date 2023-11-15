@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{!user.id}}">
-  <button bindtap="login">授权登录</button>
+  <button bindtap="login" disabled="{{buttonDisabled}}">授权登录</button>
 </view>
 <view class="container" wx:else>
   <view class="top_container">
