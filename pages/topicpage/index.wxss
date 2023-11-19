@@ -1,11 +1,18 @@
 /**index.wxss**/
+.tool_container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-right: 20px;
+  padding-top: 10px;
+}
 .content_container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  padding: 20rpx 5rpx;
+  padding-bottom: 20rpx;
   box-sizing: border-box;
 } 
 
@@ -27,6 +34,10 @@
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.topic_content {
+  flex: 1;
 }
 
 .topic_content image {

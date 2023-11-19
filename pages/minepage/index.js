@@ -31,7 +31,7 @@ Page({
 
   loadAnimals: function (user) {
     // todo
-    utils.http.get('/pets').then(data => {
+    utils.http.get('/pets/mine').then(data => {
       console.log(data);
       this.setData({
         animals: data

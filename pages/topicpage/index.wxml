@@ -1,24 +1,27 @@
 <!--index.wxml-->
 <view class="container">
+  <view class="tool_container">
+    <view><button size="mini" type="default" bindtap="onTopicNew">发表新话题</button></view>
+  </view>
   <view class="content_container">
     <block wx:for="{{topics}}">
-      <view class="content_container_item" wx:key="id" data-index="{{index}}">
+      <view class="content_container_item" wx:key="id" data-index="{{item.id}}">
         <view class="topic_avatar">
           <image src="{{item.avatar}}"></image>
         </view>
         <view class="topic_content">
-          <view><text>{{item.time}}</text></view>
-          <view bindtap="onTopicSelected" data-index="{{index}}"><text>{{item.content}}</text></view>
+          <view><text>{{item.create_time}}</text></view>
+          <view bindtap="onTopicSelected" data-index="{{item.id}}"><text user-select="true">{{item.content}}</text></view>
           <view class="topic_content_icons">
-            <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{index}}"></image>
-            <view><text>{{item.comment}}</text></view>
+            <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{item.id}}"></image>
+            <view><text>{{item.comment_count}}</text></view>
             <block wx:if="{{item.i_liked}}">
               <image src="../../images/like-1.png" bindtap="onTopicLike" data-index="{{index}}"></image>
             </block>
             <block wx:else>
               <image src="../../images/like.png" bindtap="onTopicLike" data-index="{{index}}"></image>
             </block>
-            <text>{{item.like}}</text>
+            <text>{{item.like_count}}</text>
           </view>
         </view>
 

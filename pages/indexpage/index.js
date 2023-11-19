@@ -56,10 +56,9 @@ Page({
   },
   onSearched(e) {
     console.log(e)
-    const value = e.detail.value;
-    const list = app.globalData.animals.filter(e => {
-      return e.name.search(value) > -1;
-    });
+    const name = e.detail.value;
+    // todo 根据名字查询
+    const list = [];
     this.setData({
       animals: list
     });

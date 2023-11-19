@@ -18,9 +18,21 @@ Page({
       });
     }
   },
-  onLoad() {
-    this.setData({
-      topics: app.globalData.topics.concat(app.globalData.topics)
+  onShow() {
+    utils.http.get('/topics').then(data => {
+      console.log(data);
+      this.setData({
+        topics: data
+      });
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'failed'
+      });
+      this.setData({
+        topics: []
+      });
     });
   },
   onTopicSelected(e) {
@@ -34,10 +46,33 @@ Page({
     const index = e.currentTarget.dataset.index;
     console.log(index);
     const topics = this.data.topics;
-    topics[index].i_liked = !topics[index].i_liked;
-    topics[index].like = topics[index].i_liked ? topics[index].like+1 : topics[index].like-1;
-    this.setData({
-      topics: topics
+    const topic = topics[index];
+    // update
+    utils.http.put('/topics/' + topic.id + '/like').then(data => {
+      console.log(data);
+      if (!data) {
+        wx.showToast({
+          title: '更新失败',
+          icon: 'failed'
+        });
+      } else {
+        topics[index] = data;
+        this.setData({
+          topics: topics
+        })
+      }
+      //
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '更新失败',
+        icon: 'failed'
+      });
     });
+  },
+  onTopicNew() {
+    wx.navigateTo({
+      url: '../topicdetailpage/index',
+    })
   }
 })

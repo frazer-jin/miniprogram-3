@@ -1,6 +1,18 @@
 <!--index.wxml-->
 <view class="container">
-  <block wx:if="{{none}}">
+  <block wx:if="{{create}}">
+    <view class="new_topic_container">
+      <form bindsubmit="createTopic">
+        <view>
+          <textarea placeholder="发表您的话题" maxlength="1000" name="topic" />
+        </view>
+        <view>
+          <button form-type="submit"> 发表 </button>
+        </view>
+      </form>
+    </view>
+  </block>
+  <block wx:elif="{{none}}">
     <icon class="icon-box-img" type="warn" size="50"></icon>
     <view class="icon-box-ctn">
       <view class="icon-box-desc">没有找到该话题的相关信息</view>
@@ -8,42 +20,44 @@
   </block>
   <block wx:else>
     <!--index.wxml-->
-    <view class="container">
-      <view class="content_container">
-        <view class="content_container_item">
-          <view class="topic_avatar">
-            <image src="{{topic.avatar}}"></image>
-          </view>
-          <view class="topic_content">
-            <view><text>{{topic.time}}</text></view>
-            <view><text>{{topic.content}}</text></view>
-          </view>
+    <view class="content_container">
+      <view class="content_container_item">
+        <view class="topic_avatar">
+          <image src="{{topic.avatar}}"></image>
         </view>
-        <view class="topic_content_footer">
-          <text>评论 </text><text>{{topic.comment}}</text>
-          <text> 赞 </text><text>{{topic.like}}</text>
+        <view class="topic_content">
+          <view><text>{{topic.time}}</text></view>
+          <view><text>{{topic.content}}</text></view>
         </view>
-        <view class="comment_container_item">
-          <block wx:for="{{comments}}">
-            <view class="content_container_item" wx:key="id" data-index="{{index}}">
-              <view class="topic_avatar">
-                <image src="{{item.avatar}}"></image>
-              </view>
-              <view class="topic_content">
-                <view><text>{{item.time}}</text></view>
-                <view><text>{{item.content}}</text></view>
-              </view>
-
+      </view>
+      <view class="topic_content_footer">
+        <text>评论 </text><text>{{topic.comment_count}}</text>
+        <text> 赞 </text><text>{{topic.like_count}}</text>
+      </view>
+      <view class="comment_container_item">
+        <block wx:for="{{comments}}">
+          <view class="content_container_item" wx:key="id" data-index="{{index}}">
+            <view class="topic_avatar">
+              <image src="{{item.avatar}}"></image>
             </view>
-          </block>
-        </view>
+            <view class="topic_content">
+              <view><text>{{item.time}}</text></view>
+              <view><text>{{item.content}}</text></view>
+            </view>
+
+          </view>
+        </block>
       </view>
     </view>
     <view class="bottom-component">
-      <form bindsubmit="bindFormSubmit">
-        <textarea placeholder="发表您的评论" name="textarea" />
-        <button form-type="submit"> 提交 </button>
-      </form>
+      <view>
+        <form bindsubmit="createComment">
+          <!-- 隐藏的表单项 -->
+          <input type="hidden" name="topic_id" value="{{topic.id}}" />
+          <textarea placeholder="发表您的评论" maxlength="500" name="comment" />
+          <button form-type="submit"> 提交 </button>
+        </form>
+      </view>
     </view>
   </block>
 </view>

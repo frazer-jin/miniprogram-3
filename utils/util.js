@@ -93,6 +93,11 @@ const http = {
     return result;
   },
 
+  async put(path, payload) {
+    const result =  await http.request('PUT', path, payload);
+    return result;
+  },
+
   async delete(path) {
     const result =  await http.request('DELETE', path);
     return result;

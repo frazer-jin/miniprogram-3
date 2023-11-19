@@ -1,4 +1,17 @@
 /**index.wxss**/
+.new_topic_container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.new_topic_container textarea {
+  height: 400px;
+  width: 100%;
+}
+.new_topic_container button {
+  margin-top: 10px;
+}
+
 .content_container {
   width: 100%;
   display: flex;
@@ -47,5 +60,9 @@
 .bottom-component {
   position: fixed; /* 或者 position: absolute; */
   bottom: 10px;
-  width: 100%; /* 如果需要占满整个页面宽度 */
+  width: 90%; /* 如果需要占满整个页面宽度 */
+}
+
+.bottom-component textarea {
+  width: 100%;
 }
