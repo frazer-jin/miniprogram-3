@@ -17,8 +17,8 @@ Page({
         url: '/pages/minepage/index',
       });
     }
-  },
-  onShow() {
+    const user_id = user.id;
+    // 获取数据
     utils.http.get('/topics').then(data => {
       console.log(data);
       this.setData({

@@ -23,7 +23,7 @@
     <view class="content_container">
       <view class="content_container_item">
         <view class="topic_avatar">
-          <image src="{{topic.avatar}}"></image>
+          <image src="{{topic.user_avatar_url}}"></image>
         </view>
         <view class="topic_content">
           <view><text>{{topic.time}}</text></view>
@@ -34,26 +34,29 @@
         <text>评论 </text><text>{{topic.comment_count}}</text>
         <text> 赞 </text><text>{{topic.like_count}}</text>
       </view>
-      <view class="comment_container_item">
-        <block wx:for="{{comments}}">
-          <view class="content_container_item" wx:key="id" data-index="{{index}}">
-            <view class="topic_avatar">
-              <image src="{{item.avatar}}"></image>
-            </view>
-            <view class="topic_content">
-              <view><text>{{item.time}}</text></view>
-              <view><text>{{item.content}}</text></view>
-            </view>
-
-          </view>
-        </block>
-      </view>
     </view>
+    <scroll-view scroll-y style="flex: 1">
+    <view class="content_container">
+      <block wx:for="{{comments}}">
+        <view class="content_container_item" wx:key="id" data-index="{{index}}">
+          <view class="comment_avatar">
+            <image src="{{item.avatar}}"></image>
+          </view>
+          <view class="topic_content">
+            <view><text>{{item.time}}</text></view>
+            <view><text>{{item.content}}</text></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
     <view class="bottom-component">
       <view>
         <form bindsubmit="createComment">
-          <!-- 隐藏的表单项 -->
-          <input type="hidden" name="topic_id" value="{{topic.id}}" />
+          <view hidden="true">
+            <!-- 隐藏的表单项 -->
+            <input name="topic_id" value="{{topic.id}}" />
+          </view>
           <textarea placeholder="发表您的评论" maxlength="500" name="comment" />
           <button form-type="submit"> 提交 </button>
         </form>

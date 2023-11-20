@@ -7,7 +7,7 @@
     <block wx:for="{{topics}}">
       <view class="content_container_item" wx:key="id" data-index="{{item.id}}">
         <view class="topic_avatar">
-          <image src="{{item.avatar}}"></image>
+          <image src="{{item.user_avatar_url}}"></image>
         </view>
         <view class="topic_content">
           <view><text>{{item.create_time}}</text></view>

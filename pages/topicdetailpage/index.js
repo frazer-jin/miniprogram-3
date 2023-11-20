@@ -9,6 +9,8 @@ Page({
   data: {
     create: undefined, // 创建新话题，这个值为true
     topic: undefined,
+    topicId: undefined,
+    comments: undefined,
     none: undefined, // 话题没找到的话，这个值为true
   },
   onLoad(option) {
@@ -26,8 +28,10 @@ Page({
         })
       } else {
         this.setData({
-          topic: data
+          topic: data,
+          topicId: data.id
         })
+        this.loadComments(data.id);
       }
       //
     }).catch(e => {
@@ -38,6 +42,24 @@ Page({
       });
       this.setData({
         none: true
+      })
+    });
+  },
+  loadComments(topicId) {
+    http.get('/comments').then(data => {
+      console.log(data);
+      this.setData({
+        comments: data
+      })
+      //
+    }).catch(e => {
+      console.log(e);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'failed'
+      });
+      this.setData({
+        comments: []
       })
     });
   },
@@ -71,8 +93,9 @@ Page({
   },
 
   createComment(e) {
+    const topic = this.data.topic;
     // 提交表单时的逻辑处理
-    const topic_id = e.detail.topic_id;
+    const topic_id = e.detail.value.topic_id;
     console.log('提交表单topic:', topic_id);
     const content = e.detail.value.comment;
     if (!content) {
@@ -89,9 +112,11 @@ Page({
 
     http.post('/comments', payload).then(data => {
       console.log(data);
-      wx.navigateTo({
-        url: '../topicdetailpage/index?id=' + topic_id
+      topic.comment_count++;
+      this.setData({
+        topic: topic
       });
+      this.loadComments(topic_id);
     }).catch(e => {
       console.log(e);
       wx.showToast({
