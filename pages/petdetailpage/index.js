@@ -44,6 +44,15 @@ Page({
     });
   },
 
+  previewAnimal: function(e) {
+    var currentUrl = e.currentTarget.dataset.url; // 获取当前点击图片的url
+    console.log(e);
+    wx.previewImage({
+      current: currentUrl, // 当前显示图片的http链接
+      urls: [currentUrl] // 需要预览的图片http链接列表
+    })
+  },
+
   onAnimalDelete(e) {
     const id = e.currentTarget.dataset.id;
     wx.showModal({

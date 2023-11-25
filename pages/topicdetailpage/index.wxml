@@ -34,6 +34,9 @@
         <block wx:if="{{myTopic}}">
           <text bindtap="deleteTopic" data-id="{{topic.id}}">删除</text>
         </block>
+        <block wx:else>
+          <text></text>
+        </block>
         <text>评论</text><text>{{topic.comment_count}}</text>
         <text>赞</text><text>{{topic.like_count}}</text>
       </view>

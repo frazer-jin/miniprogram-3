@@ -53,7 +53,7 @@ Page({
     const id = e.currentTarget.dataset.index;
     console.log(id);
     wx.navigateTo({
-      url: '../detailpage/index?id=' + id
+      url: '../petdetailpage/index?id=' + id
     })
   },
 
