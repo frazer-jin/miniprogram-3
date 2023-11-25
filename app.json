@@ -4,7 +4,7 @@
     "pages/indexpage/index",
     "pages/fundspage/index",
     "pages/minepage/index",
-    "pages/detailpage/index",
+    "pages/petdetailpage/index",
     "pages/topicdetailpage/index",
     "pages/petpage/index",
     "pages/logs/logs"

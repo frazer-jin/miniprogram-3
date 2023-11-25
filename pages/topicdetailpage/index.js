@@ -1,6 +1,7 @@
 const {
   http
 } = require('../../utils/util');
+const session = require('../../utils/session');
 // index.js
 // 获取应用实例
 const app = getApp()
@@ -10,11 +11,13 @@ Page({
     create: undefined, // 创建新话题，这个值为true
     topic: undefined,
     topicId: undefined,
+    myTopic: undefined,
     comments: undefined,
+    comment: undefined,
     none: undefined, // 话题没找到的话，这个值为true
   },
   onLoad(option) {
-    if(!option.id) {
+    if (!option.id) {
       this.setData({
         create: true
       })
@@ -32,6 +35,13 @@ Page({
           topicId: data.id
         })
         this.loadComments(data.id);
+        const user = session.getUser();
+        console.log(user)
+        if (data.user_id == user?.id) {
+          this.setData({
+            myTopic: true
+          })
+        }
       }
       //
     }).catch(e => {
@@ -48,6 +58,12 @@ Page({
   loadComments(topicId) {
     http.get('/topics/' + topicId + '/comments').then(data => {
       console.log(data);
+      const user = session.getUser();
+      for(const c of data) {
+        if(c.user_id === user.id) {
+          c.mine = true;
+        }
+      }
       this.setData({
         comments: data
       })
@@ -114,7 +130,8 @@ Page({
       console.log(data);
       topic.comment_count++;
       this.setData({
-        topic: topic
+        topic: topic,
+        comment: ''
       });
       this.loadComments(topic_id);
     }).catch(e => {
@@ -124,5 +141,58 @@ Page({
         icon: 'failed'
       });
     });
+  },
+
+  deleteTopic(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该话题吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          // 在用户点击确定后的相关逻辑
+          http.delete('/topics/' + id).then(data => {
+            wx.navigateBack();
+          }).catch(e => {
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            });
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+          // 在用户点击取消后的相关逻辑
+        }
+      }
+    })
+  },
+
+  deleteComment(e) {
+    const topic_id = e.currentTarget.dataset.topicId;
+    const id = e.currentTarget.dataset.id;
+    console.log(e);
+    const that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该评论吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          // 在用户点击确定后的相关逻辑
+          http.delete('/comments/' + id).then(data => {
+            that.loadComments(topic_id);
+          }).catch(e => {
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            });
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+          // 在用户点击取消后的相关逻辑
+        }
+      }
+    })
   }
 })

@@ -31,14 +31,17 @@
         </view>
       </view>
       <view class="topic_content_footer">
-        <text>评论 </text><text>{{topic.comment_count}}</text>
-        <text> 赞 </text><text>{{topic.like_count}}</text>
+        <block wx:if="{{myTopic}}">
+          <text bindtap="deleteTopic" data-id="{{topic.id}}">删除</text>
+        </block>
+        <text>评论</text><text>{{topic.comment_count}}</text>
+        <text>赞</text><text>{{topic.like_count}}</text>
       </view>
     </view>
     <scroll-view scroll-y style="flex: 1">
     <view class="content_container">
       <block wx:for="{{comments}}">
-        <view class="content_container_item" wx:key="id" data-index="{{index}}">
+        <view class="comment_container_item" wx:key="id" data-index="{{index}}">
           <view class="comment_avatar">
             <image src="{{item.user_avatar_url}}"></image>
           </view>
@@ -46,6 +49,11 @@
             <view><text>{{item.time}}</text></view>
             <view><text>{{item.content}}</text></view>
           </view>
+            <view>
+            <block wx:if="{{item.mine}}">
+              <text bindtap="deleteComment" data-topic-id="{{topicId}}" data-id="{{item.id}}">删除</text>
+            </block>
+            </view>
         </view>
       </block>
     </view>
@@ -57,7 +65,7 @@
             <!-- 隐藏的表单项 -->
             <input name="topic_id" value="{{topic.id}}" />
           </view>
-          <textarea placeholder="发表您的评论" maxlength="500" name="comment" />
+          <textarea placeholder="发表您的评论" maxlength="500" name="comment" value="{{comment}}" />
           <button form-type="submit"> 提交 </button>
         </form>
       </view>
