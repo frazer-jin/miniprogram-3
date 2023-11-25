@@ -46,7 +46,7 @@ Page({
     });
   },
   loadComments(topicId) {
-    http.get('/comments').then(data => {
+    http.get('/topics/' + topicId + '/comments').then(data => {
       console.log(data);
       this.setData({
         comments: data

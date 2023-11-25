@@ -15,7 +15,7 @@
           <view class="topic_content_icons">
             <image src="../../images/comment.png" bindtap="onTopicSelected" data-index="{{item.id}}"></image>
             <view><text>{{item.comment_count}}</text></view>
-            <block wx:if="{{item.i_liked}}">
+            <block wx:if="{{item.liked}}">
               <image src="../../images/like-1.png" bindtap="onTopicLike" data-index="{{index}}"></image>
             </block>
             <block wx:else>

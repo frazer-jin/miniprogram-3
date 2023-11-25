@@ -40,7 +40,7 @@
       <block wx:for="{{comments}}">
         <view class="content_container_item" wx:key="id" data-index="{{index}}">
           <view class="comment_avatar">
-            <image src="{{item.avatar}}"></image>
+            <image src="{{item.user_avatar_url}}"></image>
           </view>
           <view class="topic_content">
             <view><text>{{item.time}}</text></view>
