@@ -1,13 +1,12 @@
 {
   "pages": [
-    "pages/topicpage/index",
     "pages/indexpage/index",
+    "pages/topicpage/index",
     "pages/fundspage/index",
     "pages/minepage/index",
     "pages/petdetailpage/index",
     "pages/topicdetailpage/index",
-    "pages/petpage/index",
-    "pages/logs/logs"
+    "pages/petpage/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

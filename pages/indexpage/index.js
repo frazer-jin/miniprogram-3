@@ -55,7 +55,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     console.log(index);
     wx.navigateTo({
-      url: '../detailpage/index?id=' + index
+      url: '../petdetailpage/index?id=' + index
     })
   },
   onSearched(e) {
