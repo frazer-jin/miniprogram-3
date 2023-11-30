@@ -28,6 +28,7 @@ Page({
       todayDate: `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`
     });
   },
+
   formSubmit: function (e) {
     // 提交表单时的逻辑处理
     console.log('提交表单:', e.detail.value);
