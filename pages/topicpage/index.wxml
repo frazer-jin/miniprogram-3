@@ -3,7 +3,7 @@
   <view class="tool_container">
     <view><button size="mini" type="default" bindtap="onTopicNew">发表新话题</button></view>
   </view>
-  <view class="content_container">
+  <scroll-view scroll-y bindscrolltolower="nextPage"  style="height: {{scrollHeight}}px;" class="content_container">
     <block wx:for="{{topics}}">
       <view class="content_container_item" wx:key="id" data-index="{{item.id}}">
         <view class="topic_avatar">
@@ -27,5 +27,5 @@
 
       </view>
     </block>
-  </view>
+  </scroll-view>
 </view>
