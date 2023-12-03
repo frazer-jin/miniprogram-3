@@ -34,7 +34,7 @@ Page({
     }
     const user_id = user.id;
     this.data.pageNum = 1;
-    this.data.animals = [];
+    this.data.topics = [];
     this.loadTopics();
   },
 

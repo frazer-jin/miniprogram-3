@@ -60,7 +60,7 @@ Page({
     http.get('/pets?page=' + page).then(data => {
       console.log(data);
       this.setData({
-        animals: [...current_animals, ...data, ...data]
+        animals: [...current_animals, ...data]
       });
       if (data.length === 0) {
         this.data.fullLoaded = true;
