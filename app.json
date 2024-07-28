@@ -31,7 +31,7 @@
       },
       {
         "pagePath": "pages/fundspage/index",
-        "text": "筹款",
+        "text": "百科",
         "iconPath": "images/fund-1.png",
         "selectedIconPath": "images/fund.png"
       },
