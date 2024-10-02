@@ -22,8 +22,8 @@ const isEmpty = obj => {
 }
 
 const http = {
-  env: 'test-2glskykn8b63a50a',
-  service: 'nestjs-mini',
+  env: 'demo-7g8ijijc9a534571',
+  service: 'express-49vd',
 
   async request(method, path, payload) {
     const result = await wx.cloud.callContainer({
